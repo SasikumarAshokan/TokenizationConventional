@@ -1,0 +1,20 @@
+{
+  "name": "ConventionalTokenization",
+  "version": "1.0.0",
+  "description": "This plugin is used for conventional tokenization",
+  "cordova": {
+    "id": "com.ahlibank.tokenization",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+	"firebase"
+  ],
+  "author": "Sasikumar Ashokan",
+  "license": "ISC"
+}

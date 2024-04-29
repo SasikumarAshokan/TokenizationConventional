@@ -1,0 +1,4 @@
+framework module TPCSDKSwift {
+  header "TPCSDKSwift-Swift.h"
+  requires objc
+}

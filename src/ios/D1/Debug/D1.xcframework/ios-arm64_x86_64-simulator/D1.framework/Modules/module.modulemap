@@ -1,0 +1,4 @@
+framework module D1 {
+  header "D1-Swift.h"
+  requires objc
+}

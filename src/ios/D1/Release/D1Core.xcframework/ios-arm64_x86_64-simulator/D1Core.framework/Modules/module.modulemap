@@ -1,0 +1,5 @@
+framework module D1Core {
+    umbrella header "D1Core.h"
+    export *
+}
+

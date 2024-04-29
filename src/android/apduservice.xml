@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<host-apdu-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:apduServiceBanner="@mipmap/ic_launcher"
+    android:description="@string/label_payment">
+    <aid-group
+        android:category="payment"
+        android:description="@string/label_d1_pay_description">
+
+        <!-- region MasterCard -->
+        <!--Standard MasterCard-->
+        <aid-filter android:name="A0000000041010" />
+
+        <!--Mastercard Maestro (Debit)-->
+        <aid-filter android:name="A0000000043060" />
+        <aid-filter android:name="A0000000042203" />
+        <aid-filter android:name="A0000000041010D056" />
+        <!-- endregion -->
+
+        <!-- region VISA -->
+        <!--VISA Electron-->
+        <aid-filter android:name="A0000000032010" />
+        <!--VISA Debit/Credit (Classic)-->
+        <aid-filter android:name="A0000000031010" />
+        <!--Visa payWave for Mobile-->
+        <aid-filter android:name="325041592E5359532E4444463031" />
+        <!-- endregion -->
+    </aid-group>
+	<!-- HCE service declaration -->
+    <service>
+      <!-- other service properties ... -->
+        <meta-data
+            android:name="android.nfc.cardemulation.host_apdu_service"
+            android:resource="@xml/apduservice" /> <!-- <==== Register the meta-data file here -->
+    </service>
+</host-apdu-service>

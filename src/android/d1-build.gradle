@@ -1,0 +1,29 @@
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+allprojects {
+    repositories {
+        flatDir{
+            dirs '../app/src/main/libs'
+        }
+		jcenter()
+    }
+}
+
+dependencies {
+	implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
+    implementation "net.java.dev.jna:jna:5.5.0@aar"
+    implementation "com.google.code.gson:gson:2.8.9"
+    implementation "com.google.android.gms:play-services-base:18.0.1"
+    implementation "androidx.appcompat:appcompat:[1.0.0,1.3.1]"
+    implementation platform('com.google.firebase:firebase-bom:30.1.0')
+    implementation 'com.google.firebase:firebase-messaging'
+	
+    releaseImplementation(name: 'd1-release-d1pay-3.3.1', ext: 'aar')
+	debugImplementation(name: 'd1-debug-d1pay-3.3.1', ext: 'aar')
+	
+}

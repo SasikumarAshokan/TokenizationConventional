@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.ahlibank.tokenization" version="1.0.0"
+	xmlns="http://apache.org/cordova/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>TokenizationConventional</name>
+	<js-module name="TokenizationConventional" src="www/TokenizationConventional.js">
+		<clobbers target="cordova.plugins.TokenizationConventional" />
+	</js-module>
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="TokenizationConventional">
+				<param name="android-package" value="com.ahlibank.tokenization.TokenizationConventional" />
+			</feature>
+		</config-file>
+		
+		<config-file parent="/manifest/application" target="AndroidManifest.xml">
+			<service android:exported="true" android:name="com.thalesgroup.gemalto.d1.d1pay.D1HCEService" android:permission="android.permission.BIND_NFC_SERVICE">
+				<intent-filter>
+					<action android:name="android.nfc.cardemulation.action.HOST_APDU_SERVICE" />
+					<category android:name="android.intent.category.DEFAULT" />
+				</intent-filter>
+				<meta-data android:name="android.nfc.cardemulation.host_apdu_service" android:resource="@xml/apduservice" />
+			</service>
+		</config-file>
+		
+		<config-file parent="/manifest/application" target="AndroidManifest.xml">
+			<service android:exported="false" android:name="com.ahlibank.tokenization.D1FirebaseService" >
+				<intent-filter>
+					<action android:name="com.google.firebase.MESSAGING_EVENT" />
+				</intent-filter>
+			</service>
+		</config-file>
+		
+		<config-file parent="/manifest/" target="AndroidManifest.xml">
+			<uses-feature android:name="android.hardware.nfc.hce" />
+			<uses-feature android:name="android.hardware.nfc" />
+			<uses-permission android:name="android.permission.USE_FINGERPRINT" />
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.NFC" />
+			<uses-permission android:name="android.permission.USE_BIOMETRIC" />
+			<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+		</config-file>
+		<config-file parent="/resources" target="res/values/strings.xml">
+			<string name="label_payment">payment</string>
+			<string name="label_d1_pay_description">payment description</string>
+		</config-file>
+		
+		<resource-file src="src/android/assets/gemcbp.properties" target="assets/gemcbp.properties" />
+		<resource-file src="src/android/assets/mobilegateway.properties" target="assets/mobilegateway.properties" />
+		<resource-file src="src/android/assets/rages.properties" target="assets/rages.properties" />
+		<resource-file src="src/android/apduservice.xml" target="res/xml/apduservice.xml" />
+		
+		<source-file src="src/android/TokenizationConventional.java" target-dir="src/com/ahlibank/tokenization/TokenizationConventional" />
+		<source-file src="src/android/D1FirebaseService.java" target-dir="src/com/ahlibank/tokenization/TokenizationConventional" />
+		<source-file src="src/android/CoreUtils.java" target-dir="src/com/ahlibank/tokenization/TokenizationConventional" />
+		<source-file src="src/android/PaymentData.java" target-dir="src/com/ahlibank/tokenization/TokenizationConventional" />
+		<source-file src="src/android/PaymentErrorData.java" target-dir="src/com/ahlibank/tokenization/TokenizationConventional" />
+		<source-file src="src/android/PaymentState.java" target-dir="src/com/ahlibank/tokenization/TokenizationConventional" />
+		
+		<framework custom="true" src="src/android/d1-build.gradle" type="gradleReference" />
+		
+		<resource-file src="src/android/libs/d1-release-d1pay-3.3.1.aar" target="libs/d1-release-d1pay-3.3.1.aar" />
+		<resource-file src="src/android/libs/d1-debug-d1pay-3.3.1.aar" target="libs/d1-debug-d1pay-3.3.1.aar" />
+	</platform>
+	<platform name="ios">
+		<config-file parent="/*" target="config.xml">
+			<feature name="TokenizationConventional">
+				<param name="ios-package" value="TokenizationConventional" />
+			</feature>
+		</config-file>
+		<config-file target="*-Info.plist" parent="CFBundleURLTypes">
+			<array>
+				<dict>
+					<key>D1_SERVICE_URL</key>
+					<string></string>
+					<key>ISSUER_ID</key>
+					<string></string>
+					<key>D1_SERVICE_RSA_EXPONENT</key>
+					<string></string>
+					<key>D1_SERVICE_RSA_MODULUS</key>
+					<string></string>
+					<key>DIGITAL_CARD_URL</key>
+					<string></string>
+					<key>CONSUMER_ID</key>
+					<string></string>
+					<key>CARD_ID</key>
+					<string></string>
+					<key>SANDBOX_JWT_URL</key>
+					<string></string>
+					<key>SANDBOX_JWT_USER</key>
+					<string></string>
+					<key>SANDBOX_JWT_PASSWORD</key>
+					<string></string>
+				</dict>
+			</array>
+		</config-file>
+		<source-file src="src/ios/TokenizationConventional.swift" />
+		<framework src="src/ios/D1/Debug/D1.xcframework" embed="true" custom="true"/>
+		<framework src="src/ios/D1/Debug/D1Core.xcframework" embed="true" custom="true"/>
+		<framework src="src/ios/D1/Debug/TPCSDKSwift.xcframework" embed="true" custom="true"/>
+		<framework src="src/ios/D1/Debug/SecureLogAPI.xcframework" embed="true" custom="true"/>
+	</platform>
+</plugin>

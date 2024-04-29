@@ -1,0 +1,4 @@
+framework module SecureLogAPI {
+    umbrella header "SecureLogAPI.h"
+    export *
+}
